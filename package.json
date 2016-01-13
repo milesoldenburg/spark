@@ -1,0 +1,24 @@
+{
+  "name": "spark",
+  "description": "JavaScript browser module for using Cisco Spark REST API",
+  "version": "0.1.0",
+  "author": {
+    "name": "Miles Oldenburg",
+    "email": "milesoldenburg@gmail.com"
+  },
+  "license" : "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:milesoldenburg/spark.git"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-bower": "0.0.10",
+    "gulp-jscs": "^1.6.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-util": "~3.0.7",
+    "webpack": "~1.12.11",
+    "webpack-dev-server": "~1.14.1",
+    "webpack-stream": "~3.1.0"
+  }
+}
