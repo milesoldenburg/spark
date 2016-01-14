@@ -1,5 +1,5 @@
 # spark
-JavaScript browser module for using Cisco Spark REST API.
+JavaScript browser AMD/CommonJS module for using Cisco Spark REST API v1.
 
 This library has a dependency on jQuery, which must be included before calling the library.
 
@@ -24,6 +24,20 @@ This library has a dependency on jQuery, which must be included before calling t
 </html>
 ```
 
+### RequireJS
+```
+define(['spark'], function(CiscoSparkAPI){
+	CiscoSpark = new CiscoSparkAPI('YOUR_ACCESS_TOKEN_HERE');
+});
+```
+
+### CommonJS
+```
+var CiscoSparkAPI = require('./spark.js');
+
+CiscoSpark = new CiscoSparkAPI('YOUR_ACCESS_TOKEN_HERE');
+```
+
 ### Instantiation
 The module requires you have an existing [Access Token](https://developer.ciscospark.com/authentication.html).
 
@@ -36,10 +50,44 @@ The default success callback simply prints the response to the console. If a cal
 
 The default error callback simply prints the error received to the console. If a callback is supplied the parameters are the jQuery AJAX parameters, `error(jqXHR jqXHR, String textStatus, String errorThrown)`.
 
-#### getMyDetails([success], [error])
+Options object parameters, example response types, and error message types are available at each of the 'Official Documentation' links.
+
+#### getMyDetails([success] [, error])
 Show the profile for the authenticated user.
 
 	CiscoSpark.getMyDetails();
+	
+[Official Documentation](https://developer.ciscospark.com/endpoint-people-me-get.html)
+	
+#### listMessages(options [, success] [, error])
+Lists all messages in a room. If present, includes the associated media content attachment for each message.
+
+The list sorts the messages in descending order by creation date.
+
+	CiscoSpark.listMessages({
+		'roomId' : 'ROOM_ID_HERE'
+	});
+	
+[Official Documentation](https://developer.ciscospark.com/endpoint-messages-get.html)
+
+#### listRooms([options] [, success] [, error])
+List rooms.
+
+By default, lists rooms to which the authenticated user belongs.
+
+	CiscoSpark.listRooms();
+	
+[Official Documentation](https://developer.ciscospark.com/endpoint-rooms-get.html)
+
+#### createMessage([options] [, success] [, error])
+Posts a plain text message, and optionally, a media content attachment, to a room.
+
+	CiscoSpark.createMessage({
+		'roomId' : 'ROOM_ID_HERE',
+		'text' : 'hello, world'
+	});
+	
+[Official Documentation](https://developer.ciscospark.com/endpoint-messages-post.html)
 
 ## Building
 
