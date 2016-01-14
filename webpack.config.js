@@ -3,6 +3,9 @@ var webpack = require('webpack');
 module.exports = {
     context : __dirname + '/',
     entry : './lib/spark.js',
+    externals : {
+        jquery : 'jQuery'
+    },
     output : {
         filename : 'spark.js',
         library : 'CiscoSpark',
