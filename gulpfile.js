@@ -3,6 +3,7 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var jscs = require('gulp-jscs');
 var jshint = require('gulp-jshint');
+var runSequence = require('run-sequence');
 var webpack = require('webpack');
 var webpackStream = require('webpack-stream');
 var WebpackDevServer = require('webpack-dev-server');
@@ -65,7 +66,10 @@ gulp.task('webpack', function(){
       .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('webpack-dev-server', function(){
+/**
+ * Runs the webpack dev server for live testing
+ */
+gulp.task('dev', function(){
     var myConfig = Object.create(webpackConfig);
     myConfig.devtool = 'eval';
     myConfig.debug = true;
@@ -93,4 +97,6 @@ gulp.task('lint', ['lint:config', 'lint:lib', 'jscs:config', 'jscs:lib']);
 /**
  * Default gulp task
  */
-gulp.task('default', ['lint']);
+gulp.task('default', function(callback){
+    runSequence('lint', 'webpack', callback);
+});
