@@ -5,7 +5,50 @@
     <title>Spark Test Page</title>
 </head>
 <body>
-    <script src="//code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
-    <script src="spark.js" type="text/javascript"></script>
+<script src="//code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+<script src="spark.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.connect').on('click', function(){
+            CiscoSpark = new CiscoSpark($('#access-token').val());
+            $('.connection-status').html('Connected');
+        });
+
+        $('.getMyDetails').on('click', function(){
+            CiscoSpark.getMyDetails();
+        });
+
+        $('.listMessages').on('click', function(){
+            CiscoSpark.listMessages({
+                'roomId' : $('#listMessagesRoom').val()
+            });
+        });
+
+        $('.createMessage').on('click', function(){
+            CiscoSpark.createMessage({
+                'roomId' : $('#createMessageRoom'),
+                'text' : $('#createMessageText')
+            });
+        });
+    });
+</script>
+
+<p>Connection Status: <span class="connection-status">Not Connected</span></p>
+
+<input type="text" id="access-token" placeholder="Enter Access Token" />
+<button class="connect">Connect</button>
+<br><br>
+
+<button class="getMyDetails">getMyDetails</button>
+<br><br>
+
+<input type="text" id="listMessagesRoom" placeholder="Enter Room ID" />
+<button class="listMessages">listMessages</button>
+<br><br>
+
+<input type="text" id="createMessageRoom" placeholder="Enter Room ID" />
+<input type="text" id="createMessageText" placeholder="Enter Message" />
+<button class="createMessage">createMessage</button>
+
 </body>
 </html>

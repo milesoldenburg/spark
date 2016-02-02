@@ -9,7 +9,7 @@ module.exports = {
     output : {
         filename : 'spark.js',
         library : 'CiscoSpark',
-        libraryTarget : 'var',
+        libraryTarget : 'umd',
         path : __dirname + '/'
     },
     plugins : [
