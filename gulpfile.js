@@ -3,6 +3,7 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var jscs = require('gulp-jscs');
 var jshint = require('gulp-jshint');
+var mocha = require('gulp-mocha');
 var runSequence = require('run-sequence');
 var webpack = require('webpack');
 var webpackStream = require('webpack-stream');
@@ -93,6 +94,11 @@ gulp.task('dev', function(){
  * Task to run all lint subtasks
  */
 gulp.task('lint', ['lint:config', 'lint:lib', 'jscs:config', 'jscs:lib']);
+
+gulp.task('test', function(){
+    gulp.src('test/spec.js')
+        .pipe(mocha());
+});
 
 /**
  * Default gulp task

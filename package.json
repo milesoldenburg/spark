@@ -6,20 +6,27 @@
     "name": "Miles Oldenburg",
     "email": "milesoldenburg@gmail.com"
   },
-  "license" : "MIT",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git@github.com:milesoldenburg/spark.git"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "gulp": "^3.9.0",
     "gulp-bower": "0.0.10",
     "gulp-jscs": "^1.6.0",
     "gulp-jshint": "^1.11.2",
+    "gulp-mocha": "^3.0.1",
     "gulp-util": "~3.0.7",
+    "mocha": "^3.0.2",
     "run-sequence": "~1.1.5",
     "webpack": "~1.12.11",
     "webpack-dev-server": "~1.14.1",
     "webpack-stream": "~3.1.0"
+  },
+  "dependencies": {
+    "q": "^1.4.1",
+    "superagent": "^2.2.0"
   }
 }
