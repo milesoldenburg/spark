@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 var CiscoSparkAPI = require('../lib/spark.js');
 var CiscoSpark;
+var myId = 'Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hNzY4NzJmOS0xNTliLTQ0MWEtYTY4Ny0xNjU3YWFjOWZjMjQ';
 
 before(function(done){
     CiscoSpark = new CiscoSparkAPI('NDc4MmQyMGQtYWRiYi00NjJkLTkyOWMtNTMwMDY0MjYyNTNiNWMxYTI0OTMtMWZk');
@@ -94,6 +95,63 @@ describe('Rooms', function(){
             done();
         }).catch(function(err){
             done(err);
+        });
+    });
+
+});
+
+describe('Memberships', function(){
+
+    var room = 'Y2lzY29zcGFyazovL3VzL1JPT00vN2M4NzViNTAtOGRhMy0xMWU2LWEyYjQtNjc0NDE5NzRmYzIw';
+    var membership = 'Y2lzY29zcGFyazovL3VzL01FTUJFUlNISVAvYTc2ODcyZjktMTU5Yi00NDFhLWE2ODctMTY1N2FhYzlmYzI0OjdjODc1YjUwLThkYTMtMTFlNi1hMmI0LTY3NDQxOTc0ZmMyMA';
+
+    it('List Memberships', function(done){
+        CiscoSpark.listMemberships().then(function(res){
+            expect(res.statusCode).to.equal(200);
+            done();
+        }).catch(function(err){
+            done(err);
+        });
+    });
+
+    it('Create Membership', function(done){
+        CiscoSpark.createMembership({
+            'roomId' : room,
+            'personEmail' : 'moldenbu@cisco.com'
+        }).then(function(){
+            done(new Error());
+        }).catch(function(err){
+            expect(err.status).to.equal(409);
+            done();
+        });
+    });
+
+    it('Get Membership Details', function(done){
+        CiscoSpark.getMembershipDetails(membership).then(function(res){
+            expect(res.statusCode).to.equal(200);
+            done();
+        }).catch(function(err){
+            done(err);
+        });
+    });
+
+    it('Update a Membership', function(done){
+        CiscoSpark.updateMembership(membership, {
+            'isModerator' : true
+        }).then(function(res){
+            expect(res.statusCode).to.equal(200);
+            done();
+        }).catch(function(err){
+            done(err);
+        });
+    });
+
+    it('Delete a Membership', function(done){
+        CiscoSpark.deleteMembership('test').then(function(){
+            done(new Error());
+        }).catch(function(err){
+            expect(err.status).to.equal(400);
+            done();
         });
     });
 
