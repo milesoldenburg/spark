@@ -42,3 +42,59 @@ describe('People', function(){
     });
 
 });
+
+describe('Rooms', function(){
+
+    it('List Rooms', function(done){
+        CiscoSpark.listRooms().then(function(res){
+            expect(res.statusCode).to.equal(200);
+            done();
+        }).catch(function(err){
+            done(err);
+        });
+    });
+
+    var id;
+
+    it('Create a Room', function(done){
+        CiscoSpark.createRoom({
+            'title' : 'Test Room'
+        }).then(function(res){
+            expect(res.statusCode).to.equal(200);
+            id = res.body.id;
+            done();
+        }).catch(function(err){
+            done(err);
+        });
+    });
+
+    it('Get Room Details', function(done){
+        CiscoSpark.getRoomDetails(id).then(function(res){
+            expect(res.statusCode).to.equal(200);
+            done();
+        }).catch(function(err){
+            done(err);
+        });
+    });
+
+    it('Update a Room', function(done){
+        CiscoSpark.updateRoom(id, {
+            'title' : 'Updated Test Room'
+        }).then(function(res){
+            expect(res.statusCode).to.equal(200);
+            done();
+        }).catch(function(err){
+            done(err);
+        });
+    });
+
+    it('Delete a Room', function(done){
+        CiscoSpark.deleteRoom(id).then(function(res){
+            expect(res.statusCode).to.equal(204);
+            done();
+        }).catch(function(err){
+            done(err);
+        });
+    });
+
+});
